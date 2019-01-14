@@ -493,8 +493,8 @@ defmodule Cpc.ClientRequest do
         state = %CR{action: :recv_header}
       ) do
     :ok = :inet.setopts(state.sock, active: :once)
-    text = "404 Not Found.\ncpcache does not support directory listing.\n"
-    reply_header = header_from_code(404, byte_size(text))
+    text = "OK"
+    reply_header = header_from_code(200, byte_size(text))
     :ok = :gen_tcp.send(state.sock, reply_header)
     :ok = :gen_tcp.send(state.sock, text)
     :ok = :gen_tcp.close(state.sock)
